@@ -28,7 +28,7 @@ Methods:
 - read(image_filename)    : Returns single imagepgs object
 - process_exif()          : Converts EXIF GPS information to google url 
 
-- search(directory)       : Searches recursivley directory and Returns list of processed imagegps objects
+- search(directory)       : Searches recursivley directory and Returns list of processed exifgps objects
 
 - set_zoom_level(integer) : Set google maps zoom level (1-21)
 - get_zoom_level()        : Returns current zoom level
@@ -43,18 +43,18 @@ EXAMPLES
 Single Image
 ::
 
-    import imagegps
+    import exifgps
 
-    image = imagegps.read(image_filename)
+    image = exifgps.read(image_filename)
     image.process_exif()
     print image.get_url()
 
 Search Directory
 ::
 
-    import imagegps
+    import exifgps
 
-    image_list = imagegps.search(directory)
+    image_list = exifgps.search(directory)
     for image in image_list:
         print image.get_url()
         print image.get_filename()
