@@ -7,7 +7,7 @@
 #---------------------------------------------
 
 import unittest
-from exifgps import Imagegps
+from __init__ import Imagegps
 
 class TestUM(unittest.TestCase):
 
