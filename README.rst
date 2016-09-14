@@ -1,15 +1,14 @@
-Imagegps Package
+Exifgps Package
 ================
 
 This package reads EXIF information in  jpg or tiff images.
-It converts the GPS information into the equivalent Google
-Maps url.
+It converts the GPS information into the equivalent
+Google Maps url.
 
 SETUP
 =====
 
 - Requires exifread module to be installed
-
 
 USAGE
 =====
@@ -17,7 +16,6 @@ USAGE
 Methods:
 -------
 
-    
 - read(image_filename)    : Returns single imagepgs object
 - process_exif()          : Converts EXIF GPS information to google url 
 
