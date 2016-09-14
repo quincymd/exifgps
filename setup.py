@@ -9,7 +9,7 @@
 from setuptools import setup
 
 setup(name="exifgps",
-      version='1.0',
+      version='1.01',
       description="EXIF GPS information to Google Maps url",
       url="http://github.com/quincymd/imagegps",
       author="Cambell Spong",
