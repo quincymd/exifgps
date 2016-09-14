@@ -9,7 +9,6 @@ SETUP
 =====
 
 - Requires exifread module to be installed
-- Optional: Logging module for debugging but can be removed
 
 
 USAGE
@@ -24,7 +23,7 @@ Methods:
 
 - search(directory)       : Searches recursivley directory and Returns list of processed imagegps objects
 
-- set_zoom_level(integer) : Set google maps zoom level (1-16)
+- set_zoom_level(integer) : Set google maps zoom level (1-21)
 - get_zoom_level()        : Returns current zoom level
 
 - get_filename()          : Return filename

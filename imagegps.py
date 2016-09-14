@@ -16,7 +16,6 @@ SETUP
 =====
 
 - Requires exifread module to be installed
-- Optional: Logging module for debugging but can be removed
 
 
 USAGE
@@ -68,8 +67,6 @@ import os
 import copy
 import warnings
 
-#logging.basicConfig(level = logging.DEBUG, format = '%(levelname)s - %(message)s')
-
 lat_regex = re.compile(r'''
         .(([0-9\/]+)..
         ([0-9\/]+)..
@@ -78,7 +75,7 @@ lat_regex = re.compile(r'''
 MAX_ZOOM_LEVEL = 21
 MIN_ZOOM_LEVEL = 1
 
-class Imagegps:
+class Imagegps(object):
     def __init__(self, filename):
         self._has_gps = False
         self._url = ""
