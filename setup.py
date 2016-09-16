@@ -9,13 +9,13 @@
 from setuptools import setup
 
 setup(name="exifgps",
-      version='1.011',
+      version='1.013',
       description="EXIF GPS information to Google Maps url",
       url="http://github.com/quincymd/exifgps",
       author="Cambell Spong",
       author_email="quincymd@mail.com",
       license="CC",
-      packages=[],
+      packages=["exifgps"],
       zip_safe=False)
 
 
