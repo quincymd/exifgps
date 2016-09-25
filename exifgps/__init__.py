@@ -100,7 +100,10 @@ class Imagegps(object):
             (numerator, denominator) = string.split("/")
             numerator = float(numerator)
             denominator = float(denominator)
-            return numerator/denominator
+            if denominator != 0:
+                return numerator/denominator
+            else:
+                return numerator
         else:
             return float(string)
 
