@@ -1,10 +1,10 @@
-#!/usr/bin/python
-#---------------------------------------------
-# Name:     Javier
-# Date:        Mon Sep 12 17:07:17 BST 2016
-# Description:  
-#---------------------------------------------
-'''
+# !/usr/bin/python3$
+# ---------------------------------------------$
+#  Name:     Javier$
+#  Date:        Mon Sep 12 17:07:17 BST 2016$
+#  Description:$
+# ---------------------------------------------$
+'''$
 Imagegps Package
 ================
 
@@ -24,19 +24,21 @@ USAGE
 Methods:
 -------
 
-    
-- read(image_filename)    : Returns single imagepgs object
-- process_exif()          : Converts EXIF GPS information to google url 
 
-- search(directory)       : Searches recursivley directory and Returns list of processed exifgps objects
+- read(image_filename)    : Returns single imagepgs object
+- process_exif()          : Converts EXIF GPS information to google url
+
+- search(directory)       : Searches recursivley directory
+                            Returns list of processed exifgps objects
 
 - set_zoom_level(integer) : Set google maps zoom level (1-21)
 - get_zoom_level()        : Returns current zoom level
 
 - get_filename()          : Return filename
-- get_url()               : Return google_url if EXIF present. Returns "" if no EXIF information
+- get_url()               : Return google_url if EXIF present.
+                            Returns "" if no EXIF information
 
-    
+
 EXAMPLES
 ========
 
@@ -73,6 +75,7 @@ lat_regex = re.compile(r'''
 
 MAX_ZOOM_LEVEL = 21
 MIN_ZOOM_LEVEL = 1
+
 
 class Imagegps(object):
     def __init__(self, filename):
@@ -125,7 +128,7 @@ class Imagegps(object):
         degrees = self._convert_int_float(gps_data[0])
         minutes = self._convert_int_float(gps_data[1])
         seconds = self._convert_int_float(gps_data[2])
-        return degrees + (minutes/60.0) + (seconds/3600) 
+        return degrees + (minutes/60.0) + (seconds/3600)
 
     def set_zoom_level(self, zoom_level):
         '''
@@ -145,9 +148,9 @@ class Imagegps(object):
         '''
         gps = {}
 
-        if os.path.exists(filename) == False:
-            print "Error: Unable to open %s" % filename
-            return None 
+        if os.path.exists(filename) is False:
+            print("Error: Unable to open %s" % filename)
+            return None
 
         with open(filename, "rb") as fh:
             tags = exifread.process_file(fh, details=False)
@@ -156,7 +159,7 @@ class Imagegps(object):
             for tag in tags.keys():
                 if "GPS" in tag:
                     gps[tag] = tags[tag]
-        return gps 
+        return gps
 
     def _set_google_url(self, decimal_degrees, zoom):
         '''
@@ -166,9 +169,9 @@ class Imagegps(object):
         '''
         lat = decimal_degrees[0]
         long = decimal_degrees[1]
-        
+
         url = "https://google.co.uk/maps/@%.7f,%.7f,%dz" % (lat, long, zoom)
-        
+
         return url
 
     def _valid_gps(self, gps_tags):
@@ -179,14 +182,16 @@ class Imagegps(object):
             GPSLongitudeRef,
             GPSLatitudueRef
         '''
-        needed_tags = [ "GPS GPSLongitude", "GPS GPSLatitude", "GPS GPSLongitudeRef", "GPS GPSLatitudeRef"]
+        needed_tags = ["GPS GPSLongitude", "GPS GPSLatitude",
+                       "GPS GPSLongitudeRef", "GPS GPSLatitudeRef"]
+
         tags = gps_tags.keys()
         for tag in needed_tags:
             if tag not in tags:
                 return False
         return True
 
-    def _set_decimal_degrees(self, gps_tags):
+    def _set_decimal_deg(self, gps_tags):
         '''
         Reads image gps tags and converts to decimal degrees
         Returns tuple of (latitude, longitude)
@@ -217,13 +222,12 @@ class Imagegps(object):
         '''
         Opens valid file, read exif information and calculates decimal degrees
         '''
-        if self._is_valid_filetype(self._filename) == True:
+        if self._is_valid_filetype(self._filename) is True:
             self._gps_tags = self._read_exif(self._filename)
-            if len(self._gps_tags) != 0:
-                if self._valid_gps(self._gps_tags):
-                    self._has_gps = True
-                    self._decimal_degrees = self._set_decimal_degrees(self._gps_tags)
-         
+            if len(self._gps_tags) != 0 and self._valid_gps(self._gps_tags):
+                self._has_gps = True
+                self._decimal_degrees = self._set_decimal_deg(self._gps_tags)
+
     def get_url(self):
         '''
         Creates google_url with current zoom level
@@ -231,19 +235,21 @@ class Imagegps(object):
         if self._has_gps:
             self._url = self._set_google_url(self._decimal_degrees, self._zoom)
         return self._url
-    
+
     def __str__(self):
         string = "Filename: %s\n" % self._filename
         string += "Url: %s\n" % self.get_url()
         return string
 
+
 def read(filename):
     return Imagegps(filename)
 
+
 def search(directory):
     image_list = []
-    if os.path.exists(directory) == False:
-        print "Error: Unable to open directory %s" % directory
+    if os.path.exists(directory) is False:
+        print("Error: Unable to open directory %s" % directory)
         return
     for root, dir, files in os.walk(directory):
         for file in files:
